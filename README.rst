@@ -27,6 +27,7 @@ Synopsis
         [-v <level>] [--verbosity <level>]                          \
         [--errorType <typeError>]                                   \
         [--customErrorMessage <message>]                            \
+        [--delayTime <secondsDelay>]                                \
         [--version]                                                 \
         [--man]                                                     \
         [--meta]                                                    \
@@ -70,8 +71,8 @@ To run using ``docker``, prefix all calls with
 
 .. code:: bash
 
-    docker run --rm                             \
-        fnndsc/pl-errorgenerator errorgenerator.py                        \
+    docker run --rm                                     \
+        fnndsc/pl-errorgenerator errorgenerator.py                        
 
 
 Examples
@@ -99,4 +100,14 @@ Raise a Built-In Error with a message
         --customErrorMessage ErrorOccured               \
         /tmp
 
+Raise a Built-In Error with a Delay
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    docker run --rm                                     \
+        fnndsc/pl-errorgenerator errorgenerator.py      \
+        --errorType UnboundLocalError                   \
+        --delayTime 5                                   \
+        /tmp
 

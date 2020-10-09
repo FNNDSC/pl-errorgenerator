@@ -10,6 +10,7 @@
 #
 
 import os
+import time
 # import the Chris app superclass
 from chrisapp.base import ChrisApp
 
@@ -41,6 +42,7 @@ Gstr_synopsis = """
             [--meta]                                                    \\
             [--errorType <typeError>]                                   \\ 
             [--customErrorMessage <message>]                             \\
+            [--delayTime <secondsDelay>]                                 \\
             /tmp
             
             
@@ -73,6 +75,10 @@ Gstr_synopsis = """
         
         [--customErrorMessage <message>] 
         If specified, raise the error with the message.
+        
+        [--delayTime <secondsDelay>] 
+        If specified, wait for specific seconds before raising the error.
+        
 """
 
 
@@ -118,13 +124,6 @@ class ErrorGeneratorApp(ChrisApp):
         Define the CLI arguments accepted by this plugin app.
         Use self.add_argument to specify a new app argument.
         """
-        self.add_argument('--customErrorMessage',
-                          dest='customErrorMessage',
-                          type=str,
-                          optional=True,
-                          help='raise custom error message',
-                          default='')
-
         self.add_argument('--errorType',
                           dest='errorType',
                           type=str,
@@ -132,18 +131,33 @@ class ErrorGeneratorApp(ChrisApp):
                           help='raise this error',
                           default='')
 
+        self.add_argument('--customErrorMessage',
+                          dest='customErrorMessage',
+                          type=str,
+                          optional=True,
+                          help='raise custom error message',
+                          default='')
+
+        self.add_argument('--delayTime',
+                          dest='delayTime',
+                          type=int,
+                          optional=True,
+                          help='wait before raising the error',
+                          default=0)
+
     def run(self, options):
         """
         Define the code to be run by this plugin app.
         """
         print(Gstr_title)
-        print('Version: %s' % self.get_version())
+        print('Version: %s\n' % self.get_version())
 
         parentClass = BaseException
 
         def iterateSubClasses(inpClass):
             for subClass in inpClass.__subclasses__():
                 if subClass.__name__.lower() == options.errorType.lower():
+                    time.sleep(options.delayTime)
                     raise subClass(options.customErrorMessage)
                 iterateSubClasses(subClass)
 
