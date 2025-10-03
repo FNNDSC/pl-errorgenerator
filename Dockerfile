@@ -23,15 +23,18 @@
 
 
 
-FROM fnndsc/ubuntu-python3:latest
-MAINTAINER fnndsc "dev@babymri.org"
+FROM python:3.9.1-slim-buster
 
-ENV APPROOT="/usr/src/errorgenerator"
-COPY ["errorgenerator", "${APPROOT}"]
-COPY ["requirements.txt", "${APPROOT}"]
+ARG _SRCDIR=/usr/local/src/app
+WORKDIR ${_SRCDIR}
 
-WORKDIR $APPROOT
+COPY requirements.txt .
+RUN --mount=type=cache,sharing=private,target=/root/.cache/pip pip install -r requirements.txt
 
-RUN pip install -r requirements.txt
+COPY . .
+ARG extras_require=none
+RUN pip install . \
+    && cd / && rm -rf ${_SRCDIR}
+WORKDIR /
 
-CMD ["errorgenerator.py", "--help"]
+CMD ["errorgenerator"]

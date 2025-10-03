@@ -86,23 +86,21 @@ class ErrorGeneratorApp(ChrisApp):
     """
     Add prefix given by the --prefix option to the name of each input file.
     """
+    TITLE = 'Error generator app'
+    CATEGORY = ''
+    TYPE = 'ds'
+    DESCRIPTION = 'Crashes on purpose with an error message'
+    LICENSE = 'Opensource (MIT)'
     AUTHORS = 'FNNDSC (dev@babyMRI.org)'
+    VERSION = '1.0.1'
     SELFPATH = os.path.dirname(os.path.abspath(__file__))
     SELFEXEC = os.path.basename(__file__)
     EXECSHELL = 'python3'
-    TITLE = 'Error generator app'
-    CATEGORY = ''
-    TYPE = ''
-    DESCRIPTION = 'Crashes on purpose with an error message'
-    DOCUMENTATION = 'https://github.com/FNNDSC/pl-errorgenerator'
-    LICENSE = 'Opensource (MIT)'
-    VERSION = '1.0.0'
+    ICON = ''
     MAX_NUMBER_OF_WORKERS = 1  # Override with integer value
     MIN_NUMBER_OF_WORKERS = 1  # Override with integer value
-    MAX_CPU_LIMIT = ''  # Override with millicore value as string, e.g. '2000m'
-    MIN_CPU_LIMIT = ''  # Override with millicore value as string, e.g. '2000m'
-    MAX_MEMORY_LIMIT = ''  # Override with string, e.g. '1Gi', '2000Mi'
-    MIN_MEMORY_LIMIT = ''  # Override with string, e.g. '1Gi', '2000Mi'
+    MIN_CPU_LIMIT = 2000  # Override with millicore value as string, e.g. '2000m'
+    MIN_MEMORY_LIMIT = 2000  # Override with string, e.g. '1Gi', '2000Mi'
     MIN_GPU_LIMIT = 0  # Override with the minimum number of GPUs, as an integer, for your plugin
     MAX_GPU_LIMIT = 0  # Override with the maximum number of GPUs, as an integer, for your plugin
 
@@ -170,8 +168,3 @@ class ErrorGeneratorApp(ChrisApp):
         """
         print(Gstr_synopsis)
 
-
-# ENTRYPOINT
-if __name__ == "__main__":
-    app = ErrorGeneratorApp()
-    app.launch()
