@@ -86,16 +86,10 @@ class ErrorGeneratorApp(ChrisApp):
     """
     Add prefix given by the --prefix option to the name of each input file.
     """
+    PACKAGE = __package__
     TITLE = 'Error generator app'
-    CATEGORY = ''
+    CATEGORY = 'utility'
     TYPE = 'ds'
-    DESCRIPTION = 'Crashes on purpose with an error message'
-    LICENSE = 'Opensource (MIT)'
-    AUTHORS = 'FNNDSC (dev@babyMRI.org)'
-    VERSION = '1.0.1'
-    SELFPATH = os.path.dirname(os.path.abspath(__file__))
-    SELFEXEC = os.path.basename(__file__)
-    EXECSHELL = 'python3'
     ICON = ''
     MAX_NUMBER_OF_WORKERS = 1  # Override with integer value
     MIN_NUMBER_OF_WORKERS = 1  # Override with integer value

@@ -9,7 +9,7 @@ setup(
       name             =   'errorgenerator',
       # for best practices make this version the same as the VERSION class variable
       # defined in your main plugin app class
-      version          =   '1.0.1',
+      version          =   '1.0.2',
       description      =   'A ChRIS app that crashes on purpose',
       long_description =   readme,
       author           =   'Arnav Nidumolu',
